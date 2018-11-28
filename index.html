@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Dynamic Colum Selector Plugin</title>
+	<!-- Jquery Library -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</head>
+<body>
+<table border="1" width="100%" id="EmbadeTable">
+</table>
+
+<br><br>
+<style type="text/css">
+	table {
+    border-collapse: collapse;
+}
+
+table, th, td {
+    border: 1px solid black;
+    border-bottom: 1px solid #ddd;
+}
+</style>
+<div id="printablediv">
+<table border="1" width="100%" id="mytable">
+  <thead>
+    <tr>
+      <th class="att1">Col 1</th>
+      <th class="att2">Col 2</th>
+      <th class="att3">Col 3</th>
+      <th class="att4">Col 4</th>
+    </tr>
+  </thead>
+  <tbody>
+  	<tr>
+  		<td class="att1">Value1 0</td>
+  		<td class="att2">Value2 0</td>
+  		<td class="att3">Value3 0</td>
+  		<td class="att4">Value4 0</td>
+  	</tr>
+  	<tr>
+  		<td class="att1">Value1 1</td>
+  		<td class="att2">Value2 1</td>
+  		<td class="att3">Value3 1</td>
+  		<td class="att4">Value4 1</td>
+  	</tr>
+  </tbody>
+</table>
+</div>
+</body>
+<script type="text/javascript">
+	$(document).ready(function(){
+		$table=$("table#mytable");
+		$tr=$table.find("th");
+		var checkBlock="";
+		$tr.each(function()
+		{
+			var colName=$(this).html();
+		  	var id=$(this).attr("class");
+		  	checkBlock=checkBlock+'<td><label><input type="checkbox" checked name="" class="checkblock" thClass='+id+'>'+colName+"</label></td>";
+		});
+		var finalCheckBox='<tr>'+checkBlock+'</tr>';
+		$("table#EmbadeTable").html(checkBlock);
+
+ });
+$(document).on("click", "input.checkblock", function () {	
+	var className=$(this).attr("thClass");
+	var className1='.'+className;
+	$table=$("table#mytable");
+
+	if ($(this).is(':checked'))
+	{
+		$table.find(className1).show();
+	}
+	else 
+	{
+		$table.find(className1).hide();	
+	}
+	
+});
+
+</script>
+</html>
